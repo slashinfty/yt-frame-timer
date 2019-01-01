@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <title>YouTube Frame Timer</title>
+    <link href="index.css" rel="stylesheet">
+    <script src="main.js"></script>    
+</head>
+<body class="content">
+    <h1>YouTube Frame Timer</h1>
+    <h3>About</h3>
+    <p>Takes start and stop points of a YouTube video, down to the frame, and gives the time between them in the format 1h 23m 45s 678ms.</p>
+    <h3>Video Framerate</h3>
+    <p>Right click the YouTube video and select "Stats for nerds." The third line is "Current / Optimal Res" - find the two numbers after the @ and enter them for framerate.</p>
+    <label for="framerate">Framerate: </label><input type="text" id="framerate" size="3" />
+    <h3>Video Endpoints</h3>
+    <p>Find the starting point (you can use the , and . keys to find the exact frame). Right click the video and select "Copy debug info" and paste it for starting frame. Repeat for ending frame.</p>
+    <label for="startobj">Starting frame: </label><input type="text" id="startobj" style='width:100%'/>
+    <p></p>
+    <label for="endobj">Ending frame: </label><input type="text" id="endobj" style='width:100%'/>
+    <h3>Video Time</h3>
+    <button onclick="compute()">Compute time</button>
+    <p></p>
+    <label for="time">Time: </label><input type="text" id="time" readonly size="20" />
+    <p><a href="https://github.com/slashinfty/yt-frame-timer" target="_blank">View Source Code</a></p>
+</body>
+</html>
