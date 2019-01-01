@@ -8,8 +8,10 @@ function compute() {
     let seconds = 0;
     let milliseconds = 0;
     let frameRate = parseInt(framerate);
-    let diff = (endObj.lct - startObj.lct) * frameRate;
-    let frames = diff;
+    let frameFromObj = (time, fps) => Math.floor(time * fps) / fps; //round to the nearest frame
+    let startFrame = frameFromObj(startObj.lct, frameRate);
+    let endFrame = frameFromObj(endObj.lct, frameRate);
+    let frames = (endFrame - startFrame) * frameRate;
     if (frames >= frameRate) {
         seconds = Math.floor(frames / frameRate);
         frames = frames % frameRate;
