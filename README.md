@@ -1,2 +1,2 @@
 # yt-frame-timer
-A JavaScript-based program to determine the time between start and end points of a YouTube video down to the frame. Based on [https://github.com/Slush0Puppy/retime](https://github.com/Slush0Puppy/retime) by Slush Puppy (big thanks to them for their work).
+A JavaScript-based program to determine the time between start and end points of a YouTube video down to the frame. Based on [https://github.com/Slush0Puppy/retime](https://github.com/Slush0Puppy/retime) by Slush Puppy (big thanks to them for their work). Formatting done by [StackEdit](https://stackedit.io/).
