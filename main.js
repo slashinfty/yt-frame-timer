@@ -6,14 +6,14 @@ youtubeEmbed = () => {
     let url = 'http://www.youtube.com/watch?v=zbYf5_S7oJo';
     let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     let match = url.match(regExp);
-
     if (match && match[2].length === 11) {
         let myId = match[2];
-        $('#video').html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
+        $('#video').html('<iframe width="750" height="421" src="https://www.youtube.com/embed/'
+            + myId + '" frameborder="0" allowfullscreen></iframe>');
     }
 }
 
-function compute() {
+const compute = () => {
 
     // Initiate basic time variables
     let hours = 0;
@@ -26,8 +26,11 @@ function compute() {
     let frameRate = parseInt(document.getElementById('framerate').value);
     let startFrame = document.getElementById('startobj').value;
     let endFrame = document.getElementById('endobj').value;
-    if (typeof (startFrame) === 'undefined' || endFrame === 'undefined' || framerate === 'undefined') {
-        return
+    if (typeof (startFrame) === 'undefined'
+        || endFrame === 'undefined'
+        || framerate === 'undefined'
+    ) {
+        return;
     };
 
     // Calculate framerate
@@ -52,11 +55,15 @@ function compute() {
     }
 
     // Show the time and mod message in the DOM
-    let finalTime = hours.toString() + 'h ' + minutes.toString() + 'm ' + seconds.toString() + 's ' + milliseconds.toString() + 'ms';
-    let modMessage = `Mod Message: Time starts at ${parseFloat(startFrame).toFixed(3)} and ends at ${parseFloat(endFrame).toFixed(3)} at ${frameRate} fps to get a final time of ${finalTime}.`;
+    let finalTime = hours.toString() + 'h ' + minutes.toString()
+        + 'm ' + seconds.toString() + 's ' + milliseconds.toString() + 'ms';
+    let modMessage = `Mod Message: Time starts at ${parseFloat(startFrame).toFixed(3)}`
+        + ` and ends at ${parseFloat(endFrame).toFixed(3)} at ${frameRate} fps`
+        + ` to get a final time of ${finalTime}.`;
     let credits = `Retimed using [yt-frame-timer](https://mattbraddock.com/yt-frame-timer)`;
     document.getElementById('time').value = finalTime;
-    document.getElementById('postModMessage').innerHTML = "The mod message has been copied to clipboard! Please paste the it into the comment of the run you are verifying.";
+    document.getElementById('postModMessage').innerHTML = `The mod message has been copied`
+        + ` to clipboard! Please paste the it into the comment of the run you are verifying.`;
     document.getElementById('modMessage').innerHTML = modMessage + ' ' + credits;
 
     // Copy mod message to clipboard
@@ -67,7 +74,10 @@ function compute() {
 
 const validateFPS = (event) => {
     // If framerate is invalid, show an error message and disable start and end frame fields
-    if (event.target.value === '' || parseInt(event.target.value) <= 0 || isNaN(parseInt(event.target.value))) {
+    if (event.target.value === ''
+        || parseInt(event.target.value) <= 0
+        || isNaN(parseInt(event.target.value))
+    ) {
         document.getElementById('framerate').setCustomValidity('Please enter a valid framerate.');
         document.getElementById('framerate').reportValidity();
         document.getElementById('startobj').disabled = true;
@@ -86,10 +96,19 @@ const parseForTime = (event) => {
     if (typeof frameFromInputText !== 'undefined') {
         // Get the framerate
         let frameRate = parseInt(document.getElementById('framerate').value);
-        // Calculate the frame
-        let frameFromObj = (time, fps) => Math.floor(time * fps) / fps; //round to the nearest frame
+        // Round to the nearest frame
+        let frameFromObj = (time, fps) => Math.floor(time * fps) / fps;
         let finalFrame = frameFromObj(frameFromInputText, frameRate);
         // Update the DOM
         document.getElementById(event.target.id).value = `${finalFrame}`;
     }
+}
+
+const pasteFromClipboard = (event) => {
+    navigator.clipboard.readText()
+        .then(clipText => {
+            document.getElementById(event.target.id).value = clipText;
+            document.getElementById(event.target.id).blur();
+            parseForTime(event);
+        });
 }
