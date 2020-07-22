@@ -17,32 +17,23 @@ function compute() {
 
     // Calculate framerate
     let frames = (endFrame - startFrame) * frameRate;
-    if (frames >= frameRate) {
-        seconds = Math.floor(frames / frameRate);
-        frames = frames % frameRate;
-        milliseconds = Math.round(frames / frameRate * 1000);
-        if (milliseconds < 10) {
-            milliseconds = '00' + milliseconds;
-        } else if (milliseconds < 100) {
-            milliseconds = '0' + milliseconds;
-        }
-        if (seconds >= 60) {
-            minutes = Math.floor(seconds / 60);
-            seconds = seconds % 60;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-        }
-        if (minutes >= 60) {
-            hours = Math.floor(minutes / 60);
-            minutes = minutes % 60;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-        }
-    } else {
-        milliseconds = Math.round(frames / frameRate * 1000);
-        if (milliseconds < 10) {
-            milliseconds = '00' + milliseconds;
-        } else if (milliseconds < 100) {
-            milliseconds = '0' + milliseconds;
-        }
+    seconds = Math.floor(frames / frameRate);
+    frames = frames % frameRate;
+    milliseconds = Math.round(frames / frameRate * 1000);
+    if (milliseconds < 10) {
+        milliseconds = '00' + milliseconds;
+    } else if (milliseconds < 100) {
+        milliseconds = '0' + milliseconds;
+    }
+    if (seconds >= 60) {
+        minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+    }
+    if (minutes >= 60) {
+        hours = Math.floor(minutes / 60);
+        minutes = minutes % 60;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
     }
 
     // Show the time and mod message in the DOM
