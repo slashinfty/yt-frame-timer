@@ -1,3 +1,18 @@
+window.onload = () => {
+    youtubeEmbed();
+}
+
+youtubeEmbed = () => {
+    let url = 'http://www.youtube.com/watch?v=zbYf5_S7oJo';
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+
+    if (match && match[2].length === 11) {
+        let myId = match[2];
+        $('#video').html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + myId + '" frameborder="0" allowfullscreen></iframe>');
+    }
+}
+
 function compute() {
 
     // Initiate basic time variables
