@@ -1,9 +1,5 @@
-window.onload = () => {
-    youtubeEmbed();
-}
-
-youtubeEmbed = () => {
-    let url = 'http://www.youtube.com/watch?v=zbYf5_S7oJo';
+youtubeEmbed = (event) => {
+    let url = event.target.value;
     let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     let match = url.match(regExp);
     if (match && match[2].length === 11) {
@@ -67,9 +63,7 @@ const compute = () => {
     document.getElementById('modMessage').innerHTML = modMessage + ' ' + credits;
 
     // Copy mod message to clipboard
-    navigator.clipboard.writeText(modMessage)
-        .then(() => { alert(`Copied to clipboard!`) })
-        .catch((error) => { alert(`Copy failed! ${error}`) })
+    navigator.clipboard.writeText(modMessage);
 }
 
 const validateFPS = (event) => {
@@ -109,6 +103,13 @@ const pasteFromClipboard = (event) => {
         .then(clipText => {
             document.getElementById(event.target.id).value = clipText;
             document.getElementById(event.target.id).blur();
-            parseForTime(event);
+            // If the event comes from start or end input fields
+            if (event.target.id === 'startobj' || event.target.id === 'endobj') {
+                parseForTime(event);
+            }
+            // Else the event comes from the youtube link field
+            else {
+                youtubeEmbed(event);
+            }
         });
 }
