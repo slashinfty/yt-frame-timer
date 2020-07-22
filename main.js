@@ -59,7 +59,7 @@ const compute = () => {
     let credits = `Retimed using [yt-frame-timer](https://mattbraddock.com/yt-frame-timer)`;
     document.getElementById('time').value = finalTime;
     document.getElementById('postModMessage').innerHTML = `The mod message has been copied`
-        + ` to clipboard! Please paste the it into the comment of the run you are verifying.`;
+        + ` to clipboard! Please paste it into the comment of the run you are verifying.`;
     document.getElementById('modMessage').innerHTML = modMessage + ' ' + credits;
 
     // Copy mod message to clipboard
