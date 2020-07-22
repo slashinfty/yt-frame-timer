@@ -1,16 +1,21 @@
 function compute() {
-    let startObj = JSON.parse(document.getElementById('startobj').value);
-    let endObj = JSON.parse(document.getElementById('endobj').value);
-    let framerate = document.getElementById('framerate').value;
-    if (startObj == undefined || endObj == undefined || framerate == undefined) return;
+
+    // Initiate basic time variables
     let hours = 0;
     let minutes = 0;
     let seconds = 0;
     let milliseconds = 0;
-    let frameRate = parseInt(framerate);
-    let frameFromObj = (time, fps) => Math.floor(time * fps) / fps; //round to the nearest frame
-    let startFrame = frameFromObj(startObj.lct, frameRate);
-    let endFrame = frameFromObj(endObj.lct, frameRate);
+
+    // Get framerate, start frame, and end frame from corresponding elements
+    // Double check they all have a value
+    let frameRate = parseInt(document.getElementById('framerate').value);
+    let startFrame = document.getElementById('startobj').value;
+    let endFrame = document.getElementById('endobj').value;
+    if (typeof (startFrame) === 'undefined' || endFrame === 'undefined' || framerate === 'undefined') {
+        return
+    };
+
+    // Calculate framerate
     let frames = (endFrame - startFrame) * frameRate;
     if (frames >= frameRate) {
         seconds = Math.floor(frames / frameRate);
@@ -39,6 +44,46 @@ function compute() {
             milliseconds = '0' + milliseconds;
         }
     }
-    let print = hours.toString() + 'h ' + minutes.toString() + 'm ' + seconds.toString() + 's ' + milliseconds.toString() + 'ms';
-    document.getElementById('time').value = print;
+
+    // Show the time and mod message in the DOM
+    let finalTime = hours.toString() + 'h ' + minutes.toString() + 'm ' + seconds.toString() + 's ' + milliseconds.toString() + 'ms';
+    let modMessage = `Mod Message: Time starts at ${parseFloat(startFrame).toFixed(3)} and ends at ${parseFloat(endFrame).toFixed(3)} at ${frameRate} fps to get a final time of ${finalTime}.`;
+    let credits = `Retimed using [yt-frame-timer](https://mattbraddock.com/yt-frame-timer)`;
+    document.getElementById('time').value = finalTime;
+    document.getElementById('postModMessage').innerHTML = "The mod message has been copied to clipboard! Please paste the it into the comment of the run you are verifying.";
+    document.getElementById('modMessage').innerHTML = modMessage + ' ' + credits;
+
+    // Copy mod message to clipboard
+    navigator.clipboard.writeText(modMessage)
+        .then(() => { alert(`Copied to clipboard!`) })
+        .catch((error) => { alert(`Copy failed! ${error}`) })
+}
+
+const validateFPS = (event) => {
+    // If framerate is invalid, show an error message and disable start and end frame fields
+    if (event.target.value === '' || parseInt(event.target.value) <= 0 || isNaN(parseInt(event.target.value))) {
+        document.getElementById('framerate').setCustomValidity('Please enter a valid framerate.');
+        document.getElementById('framerate').reportValidity();
+        document.getElementById('startobj').disabled = true;
+        document.getElementById('endobj').disabled = true;
+        document.getElementById('computeButton').disabled = true;
+    } else {
+        document.getElementById('startobj').disabled = false;
+        document.getElementById('endobj').disabled = false;
+        document.getElementById('computeButton').disabled = false;
+    }
+}
+
+const parseForTime = (event) => {
+    // Get current frame from input field (either start time or end time)
+    let frameFromInputText = (JSON.parse(event.target.value)).lct;
+    if (typeof frameFromInputText !== 'undefined') {
+        // Get the framerate
+        let frameRate = parseInt(document.getElementById('framerate').value);
+        // Calculate the frame
+        let frameFromObj = (time, fps) => Math.floor(time * fps) / fps; //round to the nearest frame
+        let finalFrame = frameFromObj(frameFromInputText, frameRate);
+        // Update the DOM
+        document.getElementById(event.target.id).value = `${finalFrame}`;
+    }
 }
