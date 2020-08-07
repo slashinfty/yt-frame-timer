@@ -45,7 +45,7 @@ function compute() {
     document.getElementById('modMessage').innerHTML = modMessage + ' ' + credits;
 
     // Copy mod message to clipboard
-    navigator.clipboard.writeText(modMessage)
+    navigator.clipboard.writeText(modMessage + ' ' + credits)
         .then(() => { alert(`Copied to clipboard!`) })
         .catch((error) => { alert(`Copy failed! ${error}`) })
 }
