@@ -1,12 +1,33 @@
-youtubeEmbed = (event) => {
+/// This code is a bit buggy
+/// Changing framerate and recalculating doesn't change the result...
+
+const getElements = () => {
+    // attempting to access player actions inside the video element. Never got this working.
+    // get the YouTube player element from the page
+    // ytPlayer = document.getElementsByClassName("html5-video-player");
+    let myFrame = document.getElementById('videoFrame').contentWindow.document;
+    let ytPlayer = myFrame.getElementById('player');
+    console.log(`ytplayer`, ytPlayer);
+    ytPlayerUnwrapped = ytPlayer.wrappedJSObject;
+    if (ytPlayer) {
+        frameCount.innerHTML = "";
+        ytPlayer.addEventListener("onStateChange", playerChanged, true);
+        document.addEventListener("keyup", keyUp, true);
+        document.addEventListener("keydown", keyDown, true);
+    }
+}
+
+const youtubeEmbed = (event) => {
     let url = event.target.value;
     let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     let match = url.match(regExp);
     if (match && match[2].length === 11) {
         let myId = match[2];
-        $('#video').html('<iframe width="750" height="421" src="https://www.youtube.com/embed/'
+        $('#video').html('<iframe id="videoFrame" width="750" height="421" src="https://www.youtube.com/embed/'
             + myId + '" frameborder="0" allowfullscreen></iframe>');
     }
+    myFrame = document.getElementById('videoFrame');
+    myFrame.onload = () => getElements();
 }
 
 const compute = () => {
@@ -96,6 +117,16 @@ const parseForTime = (event) => {
         // Update the DOM
         document.getElementById(event.target.id).value = `${finalFrame}`;
     }
+}
+
+const copyDebugInfo = (event) => {
+    console.log(event.target.value);
+    let source = document.getElementById(`video`);
+    source.addEventListener('copy', (event) => {
+        const selection = document.getSelection();
+        event.clipboardData.setData('text/plain', selection.toString().toUpperCase());
+        event.preventDefault();
+    });
 }
 
 const pasteFromClipboard = (event) => {

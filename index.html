@@ -31,10 +31,11 @@
       <label for="framerate">Video Link: </label>
       <input type="text" id="youtubeVideo" style='width:100%' onfocus='pasteFromClipboard(event)' />
     </p>
-    <p id='video' style="text-align:center;"></p>
+    <p id='video' style="text-align:center;" oncopy='copyDebugInfo(event)'></p>
+    <!-- <button onclick='getElements()'></button> -->
     <p>
       <label for="framerate">Framerate: </label>
-      <input type="text" id="framerate" size="3" value="60" onchange='validateFPS(event)' />
+      <input type="text" id="framerate" size="3" value="60" onchange=' validateFPS(event)' />
     </p>
     <p>
       <label for="startobj">Starting frame: </label>
