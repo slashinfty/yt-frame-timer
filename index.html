@@ -8,6 +8,7 @@
   <title>YouTube Frame Timer</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
   <script src="main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="stackedit">
@@ -39,14 +40,10 @@
       <input type="text" id="endobj" style='width:100%' onchange='parseForTime(event)' />
     </p>
     <h3 id="video-time">Video Time</h3>
-    <p>
-      <button id="computeButton" onclick="compute()">Compute time</button>&nbsp;<input type="text" id="time" readonly
-        size="20" />
-    </p>
+    <button id="computeButton" onclick="compute()">Compute time</button>&nbsp;<input type="text" id="time" readonly
+      size="20" />
     <p id="modMessage"></p>
-    <b>
-      <p id="postModMessage"></p>
-    </b>
+    <button id="modMessageButton" disabled>Copy Mod Message to Clipboard</button>
   </div>
 </body>
 
