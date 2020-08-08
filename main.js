@@ -41,15 +41,17 @@ function compute() {
     let modMessage = `Mod Message: Time starts at ${parseFloat(startFrame).toFixed(3)} and ends at ${parseFloat(endFrame).toFixed(3)} at ${frameRate} fps to get a final time of ${finalTime}.`;
     let credits = `Retimed using [yt-frame-timer](https://mattbraddock.com/yt-frame-timer)`;
     document.getElementById('time').value = finalTime;
-    document.getElementById('modMessage').innerHTML = modMessage + ' ' + credits;
-
-    // Allow user to copy mod message to clipboard
+    document.getElementById('modMessage').innerText = modMessage + ' ' + credits;    
     document.getElementById("modMessageButton").disabled = false;
-    $("#modMessageButton").click(function () {
-        navigator.clipboard.writeText(modMessage + ' ' + credits)
-            .then(() => { alert(`The mod message has been copied to clipboard! Please paste it into the comment of the run you are verifying.`) })
-            .catch((error) => { alert(`Failed to copy to clipboard! ${error}`) })
-    });
+}
+
+function copyModMessage() {
+	// Allow user to copy mod message to clipboard
+	const textArea = document.getElementById('modMessage');
+	textArea.focus();
+	textArea.select();
+	document.execCommand('copy');
+	alert(`The mod message has been copied to clipboard! Please paste it into the comment of the run you are verifying.`);
 }
 
 const validateFPS = (event) => {
