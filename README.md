@@ -6,4 +6,4 @@ A JavaScript-based program to determine the time between start and end points of
 * [dadinfinitum](https://www.speedrun.com/user/dadinfinitum) - Rewrote SPRT into web-hosted JavaScript / yt-frame-retimer lead
 * [Oxknifer](https://www.speedrun.com/user/Oxknifer) - Original idea / beta tester on SPRT / yt-frame-retimer contributor
 
-Interested in contributing? [https://discord.gg/CrGnuWw](Join) the Discord server.
+Interested in contributing? [Join](https://discord.gg/CrGnuWw) the Discord server.
