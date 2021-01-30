@@ -39,7 +39,7 @@ function compute() {
     // Show the time and mod message in the DOM
     let finalTime = hours.toString() + 'h ' + minutes.toString() + 'm ' + seconds.toString() + 's ' + milliseconds.toString() + 'ms';
     let modMessage = `Mod Message: Time starts at ${parseFloat(startFrame).toFixed(3)} and ends at ${parseFloat(endFrame).toFixed(3)} at ${frameRate} fps to get a final time of ${finalTime}.`;
-    let credits = `Retimed using [yt-frame-timer](https://mattbraddock.com/yt-frame-timer)`;
+    let credits = `Retimed using [yt-frame-timer](https://slashinfty.github.io/yt-frame-timer)`;
     document.getElementById('time').value = finalTime;
     document.getElementById('modMessage').disabled = false;
     document.getElementById('modMessage').innerText = modMessage + ' ' + credits;    
