@@ -30,13 +30,20 @@
       Find the starting point (you can use the <code>,</code> and <code>.</code> keys to find the exact frame). Right
       click the video and select “Copy debug info” and paste it for starting frame. Repeat for ending frame.
     </p>
-    <p>
+   <p>
       <label for="startobj">Starting frame: </label>
-      <input type="text" id="startobj" style='width:100%' onchange='parseForTime(event)' />
+      <br>
+      <input type="text" id="startobj" style='width:90%' onchange='parseForTime(event)' />
+      <button onclick="ClearTimeStart()" style='float:right;'>Clear</button> 
+    </p>
+    <p>  
+      <label for="endobj">Ending frame: </label>
+      <br>
+      <input type="text" id="endobj" style='width:90%' onchange='parseForTime(event)' />
+      <button onclick="ClearTimeEnd()" style='float:right;'>Clear</button> 
     </p>
     <p>
-      <label for="endobj">Ending frame: </label>
-      <input type="text" id="endobj" style='width:100%' onchange='parseForTime(event)' />
+      <button onclick="ClearTime()">Clear Both</button> 
     </p>
     <h3 id="video-time">Video Time</h3>
     <button id="computeButton" onclick="compute()">Compute time</button>&nbsp;<input type="text" id="time" readonly
