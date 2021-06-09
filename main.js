@@ -46,6 +46,20 @@ function compute() {
     document.getElementById("modMessageButton").disabled = false;
 }
 
+function ClearTimeStart() {
+    document.getElementById("startobj").value = "";
+
+
+}
+function ClearTimeEnd() {
+    document.getElementById("endobj").value = "";
+}
+function ClearTime() {
+    document.getElementById("startobj").value = "";
+    document.getElementById("endobj").value = "";
+
+}
+
 function copyModMessage() {
 	// Allow user to copy mod message to clipboard
 	const textArea = document.getElementById('modMessage');
