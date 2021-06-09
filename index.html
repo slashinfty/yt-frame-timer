@@ -38,6 +38,9 @@
       <label for="endobj">Ending frame: </label>
       <input type="text" id="endobj" style='width:100%' onchange='parseForTime(event)' />
     </p>
+    <p>
+      <button onclick="ClearTime()">Clear</button> 
+    </p>
     <h3 id="video-time">Video Time</h3>
     <button id="computeButton" onclick="compute()">Compute time</button>&nbsp;<input type="text" id="time" readonly
       size="20" />
