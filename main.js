@@ -1,3 +1,7 @@
+function padNumber(number, length) {
+    return String(number).padStart(length, '0')
+}
+
 function compute() {
 
     // Initiate basic time variables
@@ -19,21 +23,14 @@ function compute() {
     let frames = (endFrame - startFrame) * frameRate;
     seconds = Math.floor(frames / frameRate);
     frames = frames % frameRate;
-    milliseconds = Math.round(frames / frameRate * 1000);
-    if (milliseconds < 10) {
-        milliseconds = '00' + milliseconds;
-    } else if (milliseconds < 100) {
-        milliseconds = '0' + milliseconds;
-    }
+    milliseconds = padNumber(Math.round(frames / frameRate * 1000), 3);
     if (seconds >= 60) {
         minutes = Math.floor(seconds / 60);
-        seconds = seconds % 60;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
+        seconds = padNumber(seconds % 60, 2);
     }
     if (minutes >= 60) {
         hours = Math.floor(minutes / 60);
-        minutes = minutes % 60;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
+        minutes = padNumber(minutes % 60, 2);
     }
 
     // Show the time and mod message in the DOM
